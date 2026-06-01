@@ -347,3 +347,5 @@ function loadApp() {
 // ---------- START ----------
 
 loadApp();
+
+console.log("SCRIPT LOADED");
