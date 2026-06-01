@@ -224,3 +224,295 @@ button:hover{
     }
 
 }
+
+// =========================
+// FOOTBALL TRACKER PRO
+// SCRIPT PART 2
+// =========================
+
+// ---------- STREAK ENGINE ----------
+
+function calculateCurrentStreak() {
+
+    if (appData.workouts.length === 0)
+        return 0;
+
+    const dates = [
+        ...new Set(
+            appData.workouts.map(
+                w => w.date
+            )
+        )
+    ];
+
+    dates.sort(
+        (a, b) =>
+        new Date(b) - new Date(a)
+    );
+
+    let streak = 1;
+
+    for (let i = 0; i < dates.length - 1; i++) {
+
+        const current =
+            new Date(dates[i]);
+
+        const next =
+            new Date(dates[i + 1]);
+
+        const diff =
+            Math.round(
+                (current - next) /
+                (1000 * 60 * 60 * 24)
+            );
+
+        if (diff === 1) {
+
+            streak++;
+
+        } else {
+
+            break;
+
+        }
+
+    }
+
+    return streak;
+
+}
+
+function calculateLongestStreak() {
+
+    if (appData.workouts.length === 0)
+        return 0;
+
+    const dates = [
+        ...new Set(
+            appData.workouts.map(
+                w => w.date
+            )
+        )
+    ];
+
+    dates.sort(
+        (a, b) =>
+        new Date(a) - new Date(b)
+    );
+
+    let longest = 1;
+    let current = 1;
+
+    for (let i = 1; i < dates.length; i++) {
+
+        const prev =
+            new Date(dates[i - 1]);
+
+        const now =
+            new Date(dates[i]);
+
+        const diff =
+            Math.round(
+                (now - prev) /
+                (1000 * 60 * 60 * 24)
+            );
+
+        if (diff === 1) {
+
+            current++;
+
+            if (current > longest)
+                longest = current;
+
+        } else {
+
+            current = 1;
+
+        }
+
+    }
+
+    return longest;
+
+}
+
+// ---------- WORKOUTS ----------
+
+function saveWorkout() {
+
+    const name =
+        document.getElementById(
+            "workoutName"
+        ).value;
+
+    const duration =
+        parseInt(
+            document.getElementById(
+                "workoutDuration"
+            ).value
+        ) || 0;
+
+    const energy =
+        parseInt(
+            document.getElementById(
+                "workoutEnergy"
+            ).value
+        ) || 0;
+
+    const notes =
+        document.getElementById(
+            "workoutNotes"
+        ).value;
+
+    if (!name) {
+
+        alert(
+            "Enter workout name"
+        );
+
+        return;
+
+    }
+
+    const workout = {
+
+        name,
+        duration,
+        energy,
+        notes,
+
+        date:
+            new Date()
+            .toISOString()
+            .split("T")[0]
+
+    };
+
+    appData.workouts.push(
+        workout
+    );
+
+    if (
+        energy >
+        appData.records.highestEnergy
+    ) {
+
+        appData.records.highestEnergy =
+            energy;
+
+    }
+
+    saveData();
+
+    addHistory(
+
+        `Workout: ${name}
+         (${duration} min)
+         Energy ${energy}/10`
+
+    );
+
+    updateDashboard();
+
+    updateStreakCards();
+
+    clearWorkoutForm();
+
+}
+
+function clearWorkoutForm() {
+
+    document.getElementById(
+        "workoutName"
+    ).value = "";
+
+    document.getElementById(
+        "workoutDuration"
+    ).value = "";
+
+    document.getElementById(
+        "workoutEnergy"
+    ).value = "";
+
+    document.getElementById(
+        "workoutNotes"
+    ).value = "";
+
+}
+
+// ---------- WEIGHT HISTORY ----------
+
+if (!appData.weightHistory) {
+
+    appData.weightHistory = [];
+
+}
+
+function saveWeight(weight) {
+
+    appData.weightHistory.push({
+
+        weight: weight,
+
+        date:
+            new Date()
+            .toLocaleDateString()
+
+    });
+
+    saveData();
+
+    addHistory(
+        `Weight Updated: ${weight} kg`
+    );
+
+}
+
+// ---------- DASHBOARD STREAKS ----------
+
+function updateStreakCards() {
+
+    const current =
+        document.getElementById(
+            "currentStreak"
+        );
+
+    const longest =
+        document.getElementById(
+            "longestStreak"
+        );
+
+    if (current) {
+
+        current.innerText =
+            calculateCurrentStreak()
+            + " Days";
+
+    }
+
+    if (longest) {
+
+        longest.innerText =
+            calculateLongestStreak()
+            + " Days";
+
+    }
+
+}
+
+// ---------- OVERRIDE DASHBOARD ----------
+
+const oldUpdateDashboard =
+    updateDashboard;
+
+updateDashboard = function() {
+
+    oldUpdateDashboard();
+
+    updateStreakCards();
+
+};
+
+// ---------- STARTUP ----------
+
+updateStreakCards();
