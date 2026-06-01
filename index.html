@@ -3,395 +3,340 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nousher Football Tracker</title>
+<title>Nousher Football Tracker Pro</title>
 
-<style>
+<link rel="stylesheet" href="style.css">
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#0f172a;
-color:white;
-padding:20px;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-}
-
-header{
-text-align:center;
-margin-bottom:25px;
-}
-
-header h1{
-font-size:2.5rem;
-}
-
-.card{
-background:#1e293b;
-padding:20px;
-border-radius:15px;
-margin-bottom:20px;
-box-shadow:0 0 15px rgba(0,0,0,.3);
-}
-
-.card h2{
-margin-bottom:15px;
-}
-
-input, textarea{
-width:100%;
-padding:10px;
-margin-top:5px;
-margin-bottom:15px;
-border:none;
-border-radius:8px;
-background:#334155;
-color:white;
-}
-
-button{
-padding:10px 20px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-}
-
-.saveBtn{
-background:#22c55e;
-}
-
-.workoutBtn{
-background:#3b82f6;
-}
-
-.shootBtn{
-background:#f59e0b;
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
-}
-
-.statBox{
-background:#334155;
-padding:15px;
-border-radius:10px;
-text-align:center;
-}
-
-.historyItem{
-padding:10px;
-border-bottom:1px solid #475569;
-}
-
-.accuracy{
-font-size:1.5rem;
-font-weight:bold;
-color:#22c55e;
-}
-
-</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<div class="container">
-
-<header>
-<h1>⚽ Nousher Football Tracker</h1>
-<p>Track Progress. Build Consistency.</p>
+<header class="topbar">
+    <h1>⚽ Nousher Football Tracker Pro</h1>
 </header>
 
-<div class="stats">
+<nav class="navbar">
+    <button onclick="showTab('dashboard')">Dashboard</button>
+    <button onclick="showTab('goal')">Daily Goal</button>
+    <button onclick="showTab('workouts')">Workouts</button>
+    <button onclick="showTab('shooting')">Shooting</button>
+    <button onclick="showTab('matches')">Matches</button>
+    <button onclick="showTab('history')">History</button>
+    <button onclick="showTab('records')">Records</button>
+</nav>
 
-<div class="statBox">
-<h3>Training Streak</h3>
-<p id="streak">0 Days</p>
-</div>
+<!-- DASHBOARD -->
 
-<div class="statBox">
-<h3>Total Workouts</h3>
-<p id="totalWorkouts">0</p>
-</div>
+<section id="dashboard" class="tab active">
 
-<div class="statBox">
-<h3>Best Accuracy</h3>
-<p id="bestAccuracy">0%</p>
-</div>
+    <div class="grid">
 
-</div>
+        <div class="card">
+            <h2>🔥 Current Streak</h2>
+            <p id="currentStreak">0 Days</p>
+        </div>
 
-<div class="card">
+        <div class="card">
+            <h2>🏆 Longest Streak</h2>
+            <p id="longestStreak">0 Days</p>
+        </div>
 
-<h2>👤 Profile</h2>
+        <div class="card">
+            <h2>🎯 Latest Accuracy</h2>
+            <p id="latestAccuracy">0%</p>
+        </div>
 
-<label>Name</label>
-<input id="name">
+        <div class="card">
+            <h2>⭐ Latest Match Rating</h2>
+            <p id="latestRating">0</p>
+        </div>
 
-<label>Position</label>
-<input id="position">
+        <div class="card">
+            <h2>🏋️ Total Workouts</h2>
+            <p id="totalWorkouts">0</p>
+        </div>
 
-<label>Weight (kg)</label>
-<input id="weight">
+        <div class="card">
+            <h2>⚽ Total Matches</h2>
+            <p id="totalMatches">0</p>
+        </div>
 
-<button class="saveBtn" onclick="saveProfile()">
-Save Profile
-</button>
+    </div>
 
-</div>
+    <div class="card">
+        <h2>📅 Tournament Countdown</h2>
 
-<div class="card">
+        <input type="date" id="tournamentDate">
 
-<h2>💪 Workout Tracker</h2>
+        <button onclick="saveTournamentDate()">
+            Save Date
+        </button>
 
-<label>Workout Name</label>
-<input id="workoutName">
+        <h3 id="countdownDisplay">
+            No Tournament Set
+        </h3>
+    </div>
 
-<label>Duration (minutes)</label>
-<input id="workoutDuration">
+</section>
 
-<label>Notes</label>
-<textarea id="workoutNotes"></textarea>
+<!-- DAILY GOAL -->
 
-<button class="workoutBtn" onclick="saveWorkout()">
-Save Workout
-</button>
+<section id="goal" class="tab">
 
-</div>
+    <div class="card">
 
-<div class="card">
+        <h2>🎯 Daily Goal</h2>
 
-<h2>🎯 Shooting Accuracy</h2>
+        <input
+        type="text"
+        id="goalText"
+        placeholder="Today's Goal">
 
-<label>Total Shots</label>
-<input type="number" id="shots">
+        <label>
 
-<label>Shots On Target</label>
-<input type="number" id="onTarget">
+            <input
+            type="checkbox"
+            id="goalCompleted">
 
-<button class="shootBtn" onclick="saveShooting()">
-Calculate Accuracy
-</button>
+            Completed
 
-<br><br>
+        </label>
 
-<div class="accuracy" id="accuracyDisplay">
-0%
-</div>
+        <br><br>
 
-</div>
+        <button onclick="saveGoal()">
+            Save Goal
+        </button>
 
-<div class="card">
+    </div>
 
-<h2>📜 History</h2>
+</section>
 
-<div id="history"></div>
+<!-- WORKOUTS -->
 
-</div>
+<section id="workouts" class="tab">
 
-</div>
+    <div class="card">
 
-<script>
+        <h2>💪 Workout Session</h2>
 
-let profile=
-JSON.parse(localStorage.getItem("profile"))||{
-name:"Nousher",
-position:"RB",
-weight:"60"
-};
+        <input
+        type="text"
+        id="workoutName"
+        placeholder="Workout Name">
 
-let workouts=
-JSON.parse(localStorage.getItem("workouts"))||[];
+        <input
+        type="number"
+        id="workoutDuration"
+        placeholder="Duration (minutes)">
 
-let shooting=
-JSON.parse(localStorage.getItem("shooting"))||[];
+        <input
+        type="number"
+        id="workoutEnergy"
+        min="1"
+        max="10"
+        placeholder="Energy 1-10">
 
-loadData();
+        <textarea
+        id="workoutNotes"
+        placeholder="Notes"></textarea>
 
-function loadData(){
+        <button onclick="saveWorkout()">
+            Save Workout
+        </button>
 
-document.getElementById("name").value=profile.name;
-document.getElementById("position").value=profile.position;
-document.getElementById("weight").value=profile.weight;
+    </div>
 
-document.getElementById("totalWorkouts").innerText=
-workouts.length;
+</section>
 
-let best=0;
+<!-- SHOOTING -->
 
-shooting.forEach(s=>{
+<section id="shooting" class="tab">
 
-if(s.accuracy>best){
-best=s.accuracy;
-}
+    <div class="card">
 
-});
+        <h2>🎯 Shooting Session</h2>
 
-document.getElementById("bestAccuracy").innerText=
-best+"%";
+        <input
+        type="number"
+        id="shots"
+        placeholder="Shots">
 
-renderHistory();
+        <input
+        type="number"
+        id="onTarget"
+        placeholder="On Target">
 
-}
+        <input
+        type="number"
+        id="goals"
+        placeholder="Goals">
 
-function saveProfile(){
+        <input
+        type="number"
+        id="shootingEnergy"
+        min="1"
+        max="10"
+        placeholder="Energy 1-10">
 
-profile.name=
-document.getElementById("name").value;
+        <textarea
+        id="shootingNotes"
+        placeholder="Notes"></textarea>
 
-profile.position=
-document.getElementById("position").value;
+        <button onclick="saveShooting()">
+            Save Shooting Session
+        </button>
 
-profile.weight=
-document.getElementById("weight").value;
+        <div class="results">
 
-localStorage.setItem(
-"profile",
-JSON.stringify(profile)
-);
+            <p>
+                Accuracy:
+                <span id="accuracyResult">
+                    0%
+                </span>
+            </p>
 
-addHistory(
-"Updated Profile"
-);
+            <p>
+                Conversion:
+                <span id="conversionResult">
+                    0%
+                </span>
+            </p>
 
-alert("Profile Saved");
+        </div>
 
-}
+    </div>
 
-function saveWorkout(){
+</section>
 
-let workout={
+<!-- MATCHES -->
 
-name:
-document.getElementById("workoutName").value,
+<section id="matches" class="tab">
 
-duration:
-document.getElementById("workoutDuration").value,
+    <div class="card">
 
-notes:
-document.getElementById("workoutNotes").value,
+        <h2>⚽ Match Report</h2>
 
-date:
-new Date().toLocaleDateString()
+        <input
+        type="text"
+        id="opponent"
+        placeholder="Opponent">
 
-};
+        <input
+        type="text"
+        id="positionPlayed"
+        placeholder="Position Played">
 
-workouts.push(workout);
+        <input
+        type="number"
+        id="minutesPlayed"
+        placeholder="Minutes Played">
 
-localStorage.setItem(
-"workouts",
-JSON.stringify(workouts)
-);
+        <input
+        type="number"
+        id="matchGoals"
+        placeholder="Goals">
 
-document.getElementById("totalWorkouts").innerText=
-workouts.length;
+        <input
+        type="number"
+        id="matchAssists"
+        placeholder="Assists">
 
-addHistory(
-"Completed Workout: "+workout.name
-);
+        <input
+        type="number"
+        id="matchRating"
+        min="1"
+        max="10"
+        placeholder="Rating 1-10">
 
-alert("Workout Saved");
+        <input
+        type="number"
+        id="matchEnergy"
+        min="1"
+        max="10"
+        placeholder="Energy 1-10">
 
-}
+        <textarea
+        id="matchNotes"
+        placeholder="Match Notes"></textarea>
 
-function saveShooting(){
+        <button onclick="saveMatch()">
+            Save Match Report
+        </button>
 
-let shots=
-parseInt(document.getElementById("shots").value)||0;
+    </div>
 
-let target=
-parseInt(document.getElementById("onTarget").value)||0;
+</section>
 
-let accuracy=0;
+<!-- HISTORY -->
 
-if(shots>0){
+<section id="history" class="tab">
 
-accuracy=
-((target/shots)*100).toFixed(1);
+    <div class="card">
 
-}
+        <h2>📜 History Timeline</h2>
 
-document.getElementById(
-"accuracyDisplay"
-).innerText=
-accuracy+"%";
+        <div id="historyContainer"></div>
 
-shooting.push({
+    </div>
 
-shots,
-target,
-accuracy,
-date:new Date().toLocaleDateString()
+</section>
 
-});
+<!-- RECORDS -->
 
-localStorage.setItem(
-"shooting",
-JSON.stringify(shooting)
-);
+<section id="records" class="tab">
 
-addHistory(
-"Shooting Accuracy: "+accuracy+"%"
-);
+    <div class="grid">
 
-loadData();
+        <div class="card">
+            <h2>🏆 Best Accuracy</h2>
+            <p id="bestAccuracy">0%</p>
+        </div>
 
-}
+        <div class="card">
+            <h2>🏆 Best Conversion</h2>
+            <p id="bestConversion">0%</p>
+        </div>
 
-function addHistory(text){
+        <div class="card">
+            <h2>🏆 Highest Match Rating</h2>
+            <p id="highestRating">0</p>
+        </div>
 
-let history=
-JSON.parse(localStorage.getItem("history"))||[];
+        <div class="card">
+            <h2>🏆 Most Goals</h2>
+            <p id="mostGoals">0</p>
+        </div>
 
-history.unshift({
-text:text,
-date:new Date().toLocaleString()
-});
+        <div class="card">
+            <h2>🏆 Highest Energy</h2>
+            <p id="highestEnergy">0</p>
+        </div>
 
-localStorage.setItem(
-"history",
-JSON.stringify(history)
-);
+    </div>
 
-renderHistory();
+    <div class="card">
 
-}
+        <h2>💾 Backup</h2>
 
-function renderHistory(){
+        <button onclick="exportData()">
+            Export Data
+        </button>
 
-let history=
-JSON.parse(localStorage.getItem("history"))||[];
+        <input
+        type="file"
+        id="importFile">
 
-let container=
-document.getElementById("history");
+        <button onclick="importData()">
+            Import Data
+        </button>
 
-container.innerHTML="";
+    </div>
 
-history.forEach(item=>{
+</section>
 
-container.innerHTML+=`
-<div class="historyItem">
-<strong>${item.text}</strong>
-<br>
-<small>${item.date}</small>
-</div>
-`;
-
-});
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
