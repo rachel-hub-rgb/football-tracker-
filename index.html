@@ -1,70 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football Tracker</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nousher Football Tracker</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+padding:20px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+header{
+text-align:center;
+margin-bottom:25px;
+}
+
+header h1{
+font-size:2.5rem;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 0 15px rgba(0,0,0,.3);
+}
+
+.card h2{
+margin-bottom:15px;
+}
+
+input, textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+border:none;
+border-radius:8px;
+background:#334155;
+color:white;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.saveBtn{
+background:#22c55e;
+}
+
+.workoutBtn{
+background:#3b82f6;
+}
+
+.shootBtn{
+background:#f59e0b;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
+.statBox{
+background:#334155;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
+
+.historyItem{
+padding:10px;
+border-bottom:1px solid #475569;
+}
+
+.accuracy{
+font-size:1.5rem;
+font-weight:bold;
+color:#22c55e;
+}
+
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>⚽ Football Tracker</h1>
-        <p>Private Squad Dashboard</p>
-    </header>
+<div class="container">
 
-    <div class="container">
+<header>
+<h1>⚽ Nousher Football Tracker</h1>
+<p>Track Progress. Build Consistency.</p>
+</header>
 
-        <div class="card">
-            <h2>🏆 Tournament Countdown</h2>
-            <p id="countdown">45 Days Remaining</p>
-        </div>
+<div class="stats">
 
-        <div class="card">
-            <h2>📊 Team Overview</h2>
-            <p>Players: 4</p>
-            <p>Total Workouts This Week: 0</p>
-            <p>Average Shooting Accuracy: 0%</p>
-        </div>
+<div class="statBox">
+<h3>Training Streak</h3>
+<p id="streak">0 Days</p>
+</div>
 
-        <div class="card">
-            <h2>👥 Players</h2>
+<div class="statBox">
+<h3>Total Workouts</h3>
+<p id="totalWorkouts">0</p>
+</div>
 
-            <div class="player">
-                <h3>Player 1</h3>
-                <p>Position: Striker</p>
-                <p>Streak: 0 Days</p>
-            </div>
+<div class="statBox">
+<h3>Best Accuracy</h3>
+<p id="bestAccuracy">0%</p>
+</div>
 
-            <div class="player">
-                <h3>Player 2</h3>
-                <p>Position: Midfielder</p>
-                <p>Streak: 0 Days</p>
-            </div>
+</div>
 
-            <div class="player">
-                <h3>Player 3</h3>
-                <p>Position: Defender</p>
-                <p>Streak: 0 Days</p>
-            </div>
+<div class="card">
 
-            <div class="player">
-                <h3>Player 4</h3>
-                <p>Position: Winger</p>
-                <p>Streak: 0 Days</p>
-            </div>
-        </div>
+<h2>👤 Profile</h2>
 
-        <div class="card">
-            <h2>🔥 Recent Activity</h2>
-            <ul>
-                <li>No activity yet</li>
-            </ul>
-        </div>
+<label>Name</label>
+<input id="name">
 
-    </div>
+<label>Position</label>
+<input id="position">
 
-    <script src="script.js"></script>
+<label>Weight (kg)</label>
+<input id="weight">
+
+<button class="saveBtn" onclick="saveProfile()">
+Save Profile
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>💪 Workout Tracker</h2>
+
+<label>Workout Name</label>
+<input id="workoutName">
+
+<label>Duration (minutes)</label>
+<input id="workoutDuration">
+
+<label>Notes</label>
+<textarea id="workoutNotes"></textarea>
+
+<button class="workoutBtn" onclick="saveWorkout()">
+Save Workout
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🎯 Shooting Accuracy</h2>
+
+<label>Total Shots</label>
+<input type="number" id="shots">
+
+<label>Shots On Target</label>
+<input type="number" id="onTarget">
+
+<button class="shootBtn" onclick="saveShooting()">
+Calculate Accuracy
+</button>
+
+<br><br>
+
+<div class="accuracy" id="accuracyDisplay">
+0%
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📜 History</h2>
+
+<div id="history"></div>
+
+</div>
+
+</div>
+
+<script>
+
+let profile=
+JSON.parse(localStorage.getItem("profile"))||{
+name:"Nousher",
+position:"RB",
+weight:"60"
+};
+
+let workouts=
+JSON.parse(localStorage.getItem("workouts"))||[];
+
+let shooting=
+JSON.parse(localStorage.getItem("shooting"))||[];
+
+loadData();
+
+function loadData(){
+
+document.getElementById("name").value=profile.name;
+document.getElementById("position").value=profile.position;
+document.getElementById("weight").value=profile.weight;
+
+document.getElementById("totalWorkouts").innerText=
+workouts.length;
+
+let best=0;
+
+shooting.forEach(s=>{
+
+if(s.accuracy>best){
+best=s.accuracy;
+}
+
+});
+
+document.getElementById("bestAccuracy").innerText=
+best+"%";
+
+renderHistory();
+
+}
+
+function saveProfile(){
+
+profile.name=
+document.getElementById("name").value;
+
+profile.position=
+document.getElementById("position").value;
+
+profile.weight=
+document.getElementById("weight").value;
+
+localStorage.setItem(
+"profile",
+JSON.stringify(profile)
+);
+
+addHistory(
+"Updated Profile"
+);
+
+alert("Profile Saved");
+
+}
+
+function saveWorkout(){
+
+let workout={
+
+name:
+document.getElementById("workoutName").value,
+
+duration:
+document.getElementById("workoutDuration").value,
+
+notes:
+document.getElementById("workoutNotes").value,
+
+date:
+new Date().toLocaleDateString()
+
+};
+
+workouts.push(workout);
+
+localStorage.setItem(
+"workouts",
+JSON.stringify(workouts)
+);
+
+document.getElementById("totalWorkouts").innerText=
+workouts.length;
+
+addHistory(
+"Completed Workout: "+workout.name
+);
+
+alert("Workout Saved");
+
+}
+
+function saveShooting(){
+
+let shots=
+parseInt(document.getElementById("shots").value)||0;
+
+let target=
+parseInt(document.getElementById("onTarget").value)||0;
+
+let accuracy=0;
+
+if(shots>0){
+
+accuracy=
+((target/shots)*100).toFixed(1);
+
+}
+
+document.getElementById(
+"accuracyDisplay"
+).innerText=
+accuracy+"%";
+
+shooting.push({
+
+shots,
+target,
+accuracy,
+date:new Date().toLocaleDateString()
+
+});
+
+localStorage.setItem(
+"shooting",
+JSON.stringify(shooting)
+);
+
+addHistory(
+"Shooting Accuracy: "+accuracy+"%"
+);
+
+loadData();
+
+}
+
+function addHistory(text){
+
+let history=
+JSON.parse(localStorage.getItem("history"))||[];
+
+history.unshift({
+text:text,
+date:new Date().toLocaleString()
+});
+
+localStorage.setItem(
+"history",
+JSON.stringify(history)
+);
+
+renderHistory();
+
+}
+
+function renderHistory(){
+
+let history=
+JSON.parse(localStorage.getItem("history"))||[];
+
+let container=
+document.getElementById("history");
+
+container.innerHTML="";
+
+history.forEach(item=>{
+
+container.innerHTML+=`
+<div class="historyItem">
+<strong>${item.text}</strong>
+<br>
+<small>${item.date}</small>
+</div>
+`;
+
+});
+
+}
+
+</script>
 
 </body>
 </html>
