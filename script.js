@@ -19,6 +19,16 @@ let appData = JSON.parse(localStorage.getItem("footballTracker")) || {
 
     history: [],
 
+   profile: {
+
+    name: "",
+    position: "",
+    age: "",
+    height: "",
+    weight: "",
+    strongFoot: ""
+
+},
     records: {
 
         bestAccuracy: 0,
