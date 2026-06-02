@@ -1139,39 +1139,31 @@ updateDashboard = function() {
 
 function saveProfile() {
 
+    if (!appData.profile) {
+        appData.profile = {};
+    }
+
     appData.profile.name =
-        document.getElementById(
-            "playerName"
-        ).value;
+        document.getElementById("playerName").value;
 
     appData.profile.position =
-        document.getElementById(
-            "playerPosition"
-        ).value;
+        document.getElementById("playerPosition").value;
 
     appData.profile.age =
-        document.getElementById(
-            "playerAge"
-        ).value;
+        document.getElementById("playerAge").value;
 
     appData.profile.height =
-        document.getElementById(
-            "playerHeight"
-        ).value;
+        document.getElementById("playerHeight").value;
 
     appData.profile.weight =
-        document.getElementById(
-            "playerWeight"
-        ).value;
+        document.getElementById("playerWeight").value;
 
     appData.profile.strongFoot =
-        document.getElementById(
-            "strongFoot"
-        ).value;
+        document.getElementById("strongFoot").value;
 
     saveData();
 
-    addHistory("Profile Updated");
+    alert("Profile Saved!");
 
 }
 updateRecords();
