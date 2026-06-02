@@ -370,32 +370,10 @@ function loadApp() {
                 appData.tournamentDate;
 
         }
-    // PASTE PROFILE CODE HERE
-
-    if(appData.profile){
-
-        document.getElementById("playerName").value =
-            appData.profile.name || "";
-
-        document.getElementById("playerPosition").value =
-            appData.profile.position || "";
-
-        document.getElementById("playerAge").value =
-            appData.profile.age || "";
-
-        document.getElementById("playerHeight").value =
-            appData.profile.height || "";
-
-        document.getElementById("playerWeight").value =
-            appData.profile.weight || "";
-
-        document.getElementById("strongFoot").value =
-            appData.profile.strongFoot || "";
-
+    
     }
 
 }
-// ---------- START ----------
 
 loadApp();// =========================
 // FOOTBALL TRACKER PRO
