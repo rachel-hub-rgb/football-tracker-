@@ -349,46 +349,52 @@ function loadApp() {
             dateInput.value =
                 appData.tournamentDate;
 
+    function loadApp() {
+
+    renderHistory();
+
+    updateCountdown();
+
+    updateDashboard();
+
+    if (appData.tournamentDate) {
+
+        const dateInput =
+            document.getElementById(
+                "tournamentDate"
+            );
+
+        if (dateInput) {
+
+            dateInput.value =
+                appData.tournamentDate;
+
         }
+    // PASTE PROFILE CODE HERE
+
+    if(appData.profile){
+
+        document.getElementById("playerName").value =
+            appData.profile.name || "";
+
+        document.getElementById("playerPosition").value =
+            appData.profile.position || "";
+
+        document.getElementById("playerAge").value =
+            appData.profile.age || "";
+
+        document.getElementById("playerHeight").value =
+            appData.profile.height || "";
+
+        document.getElementById("playerWeight").value =
+            appData.profile.weight || "";
+
+        document.getElementById("strongFoot").value =
+            appData.profile.strongFoot || "";
 
     }
 
 }
-
-if(appData.profile){
-
-    document.getElementById(
-        "playerName"
-    ).value =
-        appData.profile.name || "";
-
-    document.getElementById(
-        "playerPosition"
-    ).value =
-        appData.profile.position || "";
-
-    document.getElementById(
-        "playerAge"
-    ).value =
-        appData.profile.age || "";
-
-    document.getElementById(
-        "playerHeight"
-    ).value =
-        appData.profile.height || "";
-
-    document.getElementById(
-        "playerWeight"
-    ).value =
-        appData.profile.weight || "";
-
-    document.getElementById(
-        "strongFoot"
-    ).value =
-        appData.profile.strongFoot || "";
-
-}
-
 // ---------- START ----------
 
 loadApp();// =========================
