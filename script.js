@@ -349,7 +349,7 @@ function loadApp() {
             dateInput.value =
                 appData.tournamentDate;
 
-    function loadApp() {
+function loadApp() {
 
     renderHistory();
 
@@ -370,12 +370,34 @@ function loadApp() {
                 appData.tournamentDate;
 
         }
-    
+
     }
 
-}
+    // PASTE PROFILE CODE HERE
 
-loadApp();// =========================
+    if(appData.profile){
+
+        document.getElementById("playerName").value =
+            appData.profile.name || "";
+
+        document.getElementById("playerPosition").value =
+            appData.profile.position || "";
+
+        document.getElementById("playerAge").value =
+            appData.profile.age || "";
+
+        document.getElementById("playerHeight").value =
+            appData.profile.height || "";
+
+        document.getElementById("playerWeight").value =
+            appData.profile.weight || "";
+
+        document.getElementById("strongFoot").value =
+            appData.profile.strongFoot || "";
+
+    }
+
+};// =========================
 // FOOTBALL TRACKER PRO
 // SCRIPT PART 2
 // =========================
