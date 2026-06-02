@@ -1161,6 +1161,8 @@ function saveProfile() {
     appData.profile.strongFoot =
         document.getElementById("strongFoot").value;
 
+    console.log(document.getElementById("playerName").value);
+
     saveData();
 
     alert("Profile Saved!");
