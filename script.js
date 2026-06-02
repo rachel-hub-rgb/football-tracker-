@@ -332,6 +332,8 @@ function updateDashboard() {
 
 function loadApp() {
 
+    console.log("loadApp running");
+
     renderHistory();
 
     updateCountdown();
