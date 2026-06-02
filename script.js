@@ -336,7 +336,26 @@ function loadApp() {
 
     updateDashboard();
 
-    if(appData.profile){
+    
+    if (appData.tournamentDate) {
+
+        const dateInput =
+            document.getElementById(
+                "tournamentDate"
+            );
+
+        if (dateInput) {
+
+            dateInput.value =
+                appData.tournamentDate;
+
+        }
+
+    }
+
+}
+
+if(appData.profile){
 
     document.getElementById(
         "playerName"
@@ -367,24 +386,6 @@ function loadApp() {
         "strongFoot"
     ).value =
         appData.profile.strongFoot || "";
-
-}
-
-    if (appData.tournamentDate) {
-
-        const dateInput =
-            document.getElementById(
-                "tournamentDate"
-            );
-
-        if (dateInput) {
-
-            dateInput.value =
-                appData.tournamentDate;
-
-        }
-
-    }
 
 }
 
