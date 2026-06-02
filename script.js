@@ -354,31 +354,65 @@ function loadApp() {
 
     }
 
-    // PASTE PROFILE CODE HERE
+    if (appData.profile) {
 
-    if(appData.profile){
+        const playerName =
+            document.getElementById(
+                "playerName"
+            );
 
-        document.getElementById("playerName").value =
-            appData.profile.name || "";
+        const playerPosition =
+            document.getElementById(
+                "playerPosition"
+            );
 
-        document.getElementById("playerPosition").value =
-            appData.profile.position || "";
+        const playerAge =
+            document.getElementById(
+                "playerAge"
+            );
 
-        document.getElementById("playerAge").value =
-            appData.profile.age || "";
+        const playerHeight =
+            document.getElementById(
+                "playerHeight"
+            );
 
-        document.getElementById("playerHeight").value =
-            appData.profile.height || "";
+        const playerWeight =
+            document.getElementById(
+                "playerWeight"
+            );
 
-        document.getElementById("playerWeight").value =
-            appData.profile.weight || "";
+        const strongFoot =
+            document.getElementById(
+                "strongFoot"
+            );
 
-        document.getElementById("strongFoot").value =
-            appData.profile.strongFoot || "";
+        if (playerName)
+            playerName.value =
+                appData.profile.name || "";
+
+        if (playerPosition)
+            playerPosition.value =
+                appData.profile.position || "";
+
+        if (playerAge)
+            playerAge.value =
+                appData.profile.age || "";
+
+        if (playerHeight)
+            playerHeight.value =
+                appData.profile.height || "";
+
+        if (playerWeight)
+            playerWeight.value =
+                appData.profile.weight || "";
+
+        if (strongFoot)
+            strongFoot.value =
+                appData.profile.strongFoot || "";
 
     }
 
-};// =========================
+}// =========================
 // FOOTBALL TRACKER PRO
 // SCRIPT PART 2
 // =========================
