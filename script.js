@@ -328,26 +328,7 @@ function updateDashboard() {
 
 // ---------- LOAD ----------
 
-function loadApp() {
 
-    renderHistory();
-
-    updateCountdown();
-
-    updateDashboard();
-
-    
-    if (appData.tournamentDate) {
-
-        const dateInput =
-            document.getElementById(
-                "tournamentDate"
-            );
-
-        if (dateInput) {
-
-            dateInput.value =
-                appData.tournamentDate;
 
 function loadApp() {
 
