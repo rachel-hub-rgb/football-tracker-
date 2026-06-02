@@ -1081,5 +1081,42 @@ updateDashboard = function() {
 
 // ---------- STARTUP ----------
 
+function saveProfile() {
+
+    appData.profile.name =
+        document.getElementById(
+            "playerName"
+        ).value;
+
+    appData.profile.position =
+        document.getElementById(
+            "playerPosition"
+        ).value;
+
+    appData.profile.age =
+        document.getElementById(
+            "playerAge"
+        ).value;
+
+    appData.profile.height =
+        document.getElementById(
+            "playerHeight"
+        ).value;
+
+    appData.profile.weight =
+        document.getElementById(
+            "playerWeight"
+        ).value;
+
+    appData.profile.strongFoot =
+        document.getElementById(
+            "strongFoot"
+        ).value;
+
+    saveData();
+
+    addHistory("Profile Updated");
+
+}
 updateRecords();
 updateDashboard();
