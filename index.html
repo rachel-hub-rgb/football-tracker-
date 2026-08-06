@@ -2,285 +2,80 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 Happy Birthday Sidhart 🎉</title>
 
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
-        rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Secret Birthday</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-    <!-- Background -->
-    <div id="stars"></div>
+<div class="overlay">
 
-    <!-- Music -->
-    <audio id="bgMusic" loop>
-        <source src="birthday.mp3" type="audio/mpeg">
-    </audio>
+<div class="lock-screen">
 
-    <button id="musicBtn">🔊</button>
+<h1>🔒</h1>
 
-    <!-- ================= LOADING ================= -->
+<h2>Enter Secret PIN</h2>
 
-    <section id="loading" class="active">
+<p>Only Legends Can Enter</p>
 
-        <h1>🌌</h1>
+<!-- PIN Dots -->
 
-        <h2>Initializing Birthday Protocol...</h2>
+<div class="pin-display">
 
-        <div class="loader">
-            <div class="bar"></div>
-        </div>
+<span class="dot" id="d1"></span>
 
-        <p id="loadingText">
-            Connecting to Galaxy...
-        </p>
+<span class="dot" id="d2"></span>
 
-    </section>
+<span class="dot" id="d3"></span>
 
-    <!-- ================= INTRO ================= -->
+<span class="dot" id="d4"></span>
 
-    <section id="intro" class="hidden">
+</div>
 
-        <h1>Searching 8.2 Billion Humans...</h1>
+<!-- Number Pad -->
 
-        <p>Looking for the Football Legend...</p>
+<div class="keypad">
 
-        <button id="scanBtn">
+<button onclick="press(1)">1</button>
 
-            START SCAN
+<button onclick="press(2)">2</button>
 
-        </button>
+<button onclick="press(3)">3</button>
 
-    </section>
+<button onclick="press(4)">4</button>
 
-    <!-- ================= SCAN ================= -->
+<button onclick="press(5)">5</button>
 
-    <section id="scan" class="hidden">
+<button onclick="press(6)">6</button>
 
-        <div class="terminal">
+<button onclick="press(7)">7</button>
 
-            <p>✔ Searching Database...</p>
-            <p>✔ Football Player Found...</p>
-            <p>✔ Birthday Detected...</p>
+<button onclick="press(8)">8</button>
 
-            <h1>
+<button onclick="press(9)">9</button>
 
-                SIDHART
+<button onclick="clearPin()">⌫</button>
 
-            </h1>
+<button onclick="press(0)">0</button>
 
-            <button id="missionBtn">
+<button onclick="checkPin()">✓</button>
 
-                CONTINUE
+</div>
 
-            </button>
+<p id="message"></p>
 
-        </div>
+</div>
 
-    </section>
+</div>
 
-    <!-- ================= GIFT ================= -->
-
-    <section id="gift" class="hidden">
-
-        <h1>A mysterious gift has arrived...</h1>
-
-        <div id="giftBox">
-
-            🎁
-
-        </div>
-
-        <button id="giftBtn">
-
-            OPEN GIFT
-
-        </button>
-
-    </section>
-
-    <!-- ================= BIRTHDAY ================= -->
-
-    <section id="birthday" class="hidden">
-
-        <h3>🎉 HAPPY 🎉</h3>
-
-        <h1>
-
-            18TH
-
-        </h1>
-
-        <h2>
-
-            BIRTHDAY
-
-        </h2>
-
-        <h1 class="name">
-
-            SIDHART
-
-        </h1>
-
-        <button id="next1">
-
-            Continue →
-
-        </button>
-
-    </section>
-
-    <!-- ================= AI SCAN ================= -->
-
-    <section id="system" class="hidden">
-
-        <h1>🤖 Birthday AI Scan</h1>
-
-<pre>
-Name : Sidhart
-
-Age : 18
-
-Football Skill : ██████████ 99%
-
-Homework : ERROR 404
-
-Sleep : UNKNOWN
-
-Eating : UNLIMITED
-
-Legend Status : VERIFIED
-</pre>
-
-        <button id="next2">
-
-            Continue →
-
-        </button>
-
-    </section>
-
-    <!-- ================= CAKE ================= -->
-
-    <section id="cake" class="hidden">
-
-        <h1>🎂</h1>
-
-        <h2>
-
-            Make A Wish...
-
-        </h2>
-
-        <p>
-
-            Then click the cake.
-
-        </p>
-
-        <button id="cakeBtn">
-
-            Blow Candles
-
-        </button>
-
-    </section>
-
-    <!-- ================= LETTER ================= -->
-
-    <section id="letter" class="hidden">
-
-        <div class="letterBox">
-
-            <h2>Dear Sidhart,</h2>
-
-            <p>
-
-                Happy 18th Birthday!
-
-                Congratulations on surviving 18 years without getting
-                transferred to another planet.
-
-                May your football skills keep improving,
-                your goals keep flying in,
-                and your homework continue disappearing.
-
-                Stay awesome.
-
-            </p>
-
-        </div>
-
-        <button id="next3">
-
-            Gallery →
-
-        </button>
-
-    </section>
-
-    <!-- ================= GALLERY ================= -->
-
-    <section id="gallery" class="hidden">
-
-        <h1>Memories 📸</h1>
-
-        <div class="gallery">
-
-            <img src="images/photo1.jpg">
-            <img src="images/photo2.jpg">
-            <img src="images/photo3.jpg">
-            <img src="images/photo4.jpg">
-            <img src="images/photo5.jpg">
-            <img src="images/photo6.jpg">
-            <img src="images/photo7.jpg">
-            <img src="images/photo8.jpg">
-
-        </div>
-
-        <button id="finish">
-
-            Final Surprise 🎆
-
-        </button>
-
-    </section>
-
-    <!-- ================= FINAL ================= -->
-
-    <section id="final" class="hidden">
-
-        <h1>
-
-            🎆 HAPPY BIRTHDAY 🎆
-
-        </h1>
-
-        <h2>
-
-            SIDHART
-
-        </h2>
-
-        <p>
-
-            Level 18 Completed.
-
-            New Adventures Await.
-
-        </p>
-
-        <div id="fireworks"></div>
-
-    </section>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 
