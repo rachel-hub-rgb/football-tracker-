@@ -1,250 +1,280 @@
-// =====================================
-// OPERATION LEVEL 18
-// Happy Birthday Sidhart
-// =====================================
+/* ===========================
+   GLOBAL
+=========================== */
 
-const sections = document.querySelectorAll("section");
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,Arial,sans-serif;
+}
 
-function showSection(id){
+body{
 
-    sections.forEach(section=>{
+    height:100vh;
 
-        section.classList.remove("active");
-        section.classList.add("hidden");
+    display:flex;
 
-    });
+    justify-content:center;
 
-    document.getElementById(id).classList.remove("hidden");
-    document.getElementById(id).classList.add("active");
+    align-items:center;
+
+    background:url("background.jpg") center center/cover no-repeat;
+
+    overflow:hidden;
 
 }
 
-// =====================================
-// Loading Screen
-// =====================================
+/* Dark Overlay */
 
-const loadingText=document.getElementById("loadingText");
+.overlay{
 
-const loadingMessages=[
+    width:100%;
+    height:100%;
 
-"Connecting To Galaxy...",
-"Scanning Universe...",
-"Searching 8.2 Billion Humans...",
-"Football Player Detected...",
-"Birthday Found...",
-"Mission Ready..."
+    background:rgba(0,0,0,.55);
 
-];
+    display:flex;
 
-let i=0;
+    justify-content:center;
 
-const loadingInterval=setInterval(()=>{
-
-    if(i<loadingMessages.length){
-
-        loadingText.textContent=loadingMessages[i];
-
-        i++;
-
-    }
-
-},800);
-
-setTimeout(()=>{
-
-    clearInterval(loadingInterval);
-
-    showSection("intro");
-
-},5000);
-
-// =====================================
-// Intro
-// =====================================
-
-document.getElementById("scanBtn").onclick=()=>{
-
-    showSection("scan");
-
-};
-
-// =====================================
-// Scan
-// =====================================
-
-document.getElementById("missionBtn").onclick=()=>{
-
-    showSection("gift");
-
-};
-
-// =====================================
-// Gift
-// =====================================
-
-document.getElementById("giftBtn").onclick=()=>{
-
-    alert("🎉 Surprise Unlocked!");
-
-    showSection("birthday");
-
-};
-
-// =====================================
-// Birthday
-// =====================================
-
-document.getElementById("next1").onclick=()=>{
-
-    showSection("system");
-
-};
-
-// =====================================
-// AI Scan
-// =====================================
-
-document.getElementById("next2").onclick=()=>{
-
-    showSection("cake");
-
-};
-
-// =====================================
-// Cake
-// =====================================
-
-document.getElementById("cakeBtn").onclick=()=>{
-
-    alert("🎂 Candles Blown!\n\nMay all your wishes come true!");
-
-    showSection("letter");
-
-};
-
-// =====================================
-// Letter
-// =====================================
-
-document.getElementById("next3").onclick=()=>{
-
-    showSection("gallery");
-
-};
-
-// =====================================
-// Gallery
-// =====================================
-
-document.getElementById("finish").onclick=()=>{
-
-    showSection("final");
-
-    launchFireworks();
-
-};
-
-// =====================================
-// Music
-// =====================================
-
-const music=document.getElementById("bgMusic");
-
-const musicBtn=document.getElementById("musicBtn");
-
-let playing=false;
-
-musicBtn.onclick=()=>{
-
-    if(!playing){
-
-        music.play();
-
-        musicBtn.innerHTML="🔈";
-
-        playing=true;
-
-    }
-
-    else{
-
-        music.pause();
-
-        musicBtn.innerHTML="🔊";
-
-        playing=false;
-
-    }
-
-};
-
-// =====================================
-// Gallery Click Effect
-// =====================================
-
-const photos=document.querySelectorAll(".gallery img");
-
-photos.forEach(photo=>{
-
-    photo.onclick=()=>{
-
-        photo.classList.toggle("zoom");
-
-    };
-
-});
-
-// =====================================
-// Fireworks
-// =====================================
-
-function launchFireworks(){
-
-    const fireworks=document.getElementById("fireworks");
-
-    fireworks.innerHTML="";
-
-    for(let i=0;i<40;i++){
-
-        let spark=document.createElement("div");
-
-        spark.className="spark";
-
-        spark.style.left=Math.random()*100+"%";
-
-        spark.style.top=Math.random()*100+"%";
-
-        spark.style.animationDelay=(Math.random()*2)+"s";
-
-        fireworks.appendChild(spark);
-
-    }
+    align-items:center;
 
 }
 
-// =====================================
-// Secret Easter Egg
-// Type: FOOTBALL
-// =====================================
+/* ===========================
+   GLASS BOX
+=========================== */
 
-let secret="";
+.lock-screen{
 
-document.addEventListener("keydown",(e)=>{
+    width:340px;
 
-    secret+=e.key.toUpperCase();
+    padding:35px;
 
-    if(secret.length>20){
+    border-radius:25px;
 
-        secret=secret.slice(-20);
+    text-align:center;
 
-    }
+    color:white;
 
-    if(secret.includes("FOOTBALL")){
+    backdrop-filter:blur(15px);
 
-        alert("⚽ SECRET UNLOCKED!\n\nSidhart The Football Legend!");
+    background:rgba(255,255,255,.10);
 
-        secret="";
+    border:1px solid rgba(255,255,255,.20);
 
-    }
+    box-shadow:0 10px 40px rgba(0,0,0,.4);
 
-});
+}
+
+.lock-screen h1{
+
+    font-size:55px;
+
+}
+
+.lock-screen h2{
+
+    margin-top:10px;
+
+}
+
+.lock-screen p{
+
+    color:#ddd;
+
+    margin-top:8px;
+
+}
+
+/* ===========================
+   PIN DOTS
+=========================== */
+
+.pin-display{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+    margin:30px 0;
+
+}
+
+.dot{
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    border:2px solid white;
+
+    background:transparent;
+
+    transition:.3s;
+
+}
+
+.dot.active{
+
+    background:#00bfff;
+
+    box-shadow:0 0 15px #00bfff;
+
+}
+
+/* ===========================
+   KEYPAD
+=========================== */
+
+.keypad{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,80px);
+
+    gap:15px;
+
+    justify-content:center;
+
+}
+
+.keypad button{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    border:none;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:white;
+
+    cursor:pointer;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
+
+    transition:.25s;
+
+}
+
+.keypad button:hover{
+
+    transform:scale(1.08);
+
+    background:#00bfff;
+
+}
+
+.keypad button:active{
+
+    transform:scale(.95);
+
+}
+
+/* ===========================
+   MESSAGE
+=========================== */
+
+#message{
+
+    margin-top:25px;
+
+    height:25px;
+
+    color:#ff7070;
+
+    font-weight:bold;
+
+}
+
+/* ===========================
+   SHAKE ANIMATION
+=========================== */
+
+.shake{
+
+    animation:shake .35s;
+
+}
+
+@keyframes shake{
+
+0%{transform:translateX(0);}
+20%{transform:translateX(-10px);}
+40%{transform:translateX(10px);}
+60%{transform:translateX(-10px);}
+80%{transform:translateX(10px);}
+100%{transform:translateX(0);}
+
+}
+
+/* ===========================
+   FADE OUT
+=========================== */
+
+.fade{
+
+    animation:fade .8s forwards;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:1;
+
+}
+
+to{
+
+opacity:0;
+
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:450px){
+
+.lock-screen{
+
+width:90%;
+
+padding:25px;
+
+}
+
+.keypad{
+
+grid-template-columns:repeat(3,70px);
+
+gap:12px;
+
+}
+
+.keypad button{
+
+width:65px;
+height:65px;
+font-size:22px;
+
+}
+
+}
