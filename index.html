@@ -1,361 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nousher Football Tracker Pro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Happy Birthday Sidhart 🎉</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
-<header class="topbar">
-    <h1>⚽ Nousher Football Tracker Pro</h1>
-</header>
+    <!-- Background -->
+    <div id="stars"></div>
 
-<nav class="navbar">
-    <button onclick="showTab('dashboard')">Dashboard</button>
-    <button onclick="showTab('goal')">Daily Goal</button>
-    <button onclick="showTab('workouts')">Workouts</button>
-    <button onclick="showTab('shooting')">Shooting</button>
-    <button onclick="showTab('matches')">Matches</button>
-    <button onclick="showTab('history')">History</button>
-    <button onclick="showTab('records')">Records</button>
-</nav>
+    <!-- Music -->
+    <audio id="bgMusic" loop>
+        <source src="birthday.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- DASHBOARD -->
+    <button id="musicBtn">🔊</button>
 
-<div class="card">
-    <h2>👤 Player Profile</h2>
+    <!-- ================= LOADING ================= -->
 
-    <input type="text" id="playerName" placeholder="Player Name">
+    <section id="loading" class="active">
 
-    <input type="text" id="playerPosition" placeholder="Position">
+        <h1>🌌</h1>
 
-    <input type="number" id="playerAge" placeholder="Age">
+        <h2>Initializing Birthday Protocol...</h2>
 
-    <input type="number" id="playerHeight" placeholder="Height (cm)">
-
-    <input type="number" id="playerWeight" placeholder="Weight (kg)">
-
-    <input type="text" id="strongFoot" placeholder="Strong Foot">
-
-    <button onclick="saveProfile()">
-        Save Profile
-    </button>
-</div>
-    <section id="dashboard" class="tab active">
-
-    <div class="grid">
-
-        <div class="card">
-            <h2>🔥 Current Streak</h2>
-            <p id="currentStreak">0 Days</p>
+        <div class="loader">
+            <div class="bar"></div>
         </div>
 
-        <div class="card">
-            <h2>🏆 Longest Streak</h2>
-            <p id="longestStreak">0 Days</p>
-        </div>
+        <p id="loadingText">
+            Connecting to Galaxy...
+        </p>
 
-        <div class="card">
-            <h2>🎯 Latest Accuracy</h2>
-            <p id="latestAccuracy">0%</p>
-        </div>
+    </section>
 
-        <div class="card">
-            <h2>⭐ Latest Match Rating</h2>
-            <p id="latestRating">0</p>
-        </div>
+    <!-- ================= INTRO ================= -->
 
-        <div class="card">
-            <h2>🏋️ Total Workouts</h2>
-            <p id="totalWorkouts">0</p>
-        </div>
+    <section id="intro" class="hidden">
 
-        <div class="card">
-            <h2>⚽ Total Matches</h2>
-            <p id="totalMatches">0</p>
-        </div>
+        <h1>Searching 8.2 Billion Humans...</h1>
 
-    </div>
+        <p>Looking for the Football Legend...</p>
 
-    <div class="card">
-        <h2>📅 Tournament Countdown</h2>
+        <button id="scanBtn">
 
-        <input type="date" id="tournamentDate">
+            START SCAN
 
-        <button onclick="saveTournamentDate()">
-            Save Date
         </button>
 
-        <h3 id="countdownDisplay">
-            No Tournament Set
-        </h3>
-    </div>
+    </section>
 
-</section>
+    <!-- ================= SCAN ================= -->
 
-<!-- DAILY GOAL -->
+    <section id="scan" class="hidden">
 
-<section id="goal" class="tab">
+        <div class="terminal">
 
-    <div class="card">
+            <p>✔ Searching Database...</p>
+            <p>✔ Football Player Found...</p>
+            <p>✔ Birthday Detected...</p>
 
-        <h2>🎯 Daily Goal</h2>
+            <h1>
 
-        <input
-        type="text"
-        id="goalText"
-        placeholder="Today's Goal">
+                SIDHART
 
-        <label>
+            </h1>
 
-            <input
-            type="checkbox"
-            id="goalCompleted">
+            <button id="missionBtn">
 
-            Completed
+                CONTINUE
 
-        </label>
+            </button>
 
-        <br><br>
+        </div>
 
-        <button onclick="saveGoal()">
-            Save Goal
+    </section>
+
+    <!-- ================= GIFT ================= -->
+
+    <section id="gift" class="hidden">
+
+        <h1>A mysterious gift has arrived...</h1>
+
+        <div id="giftBox">
+
+            🎁
+
+        </div>
+
+        <button id="giftBtn">
+
+            OPEN GIFT
+
         </button>
 
-    </div>
+    </section>
 
-</section>
+    <!-- ================= BIRTHDAY ================= -->
 
-<!-- WORKOUTS -->
+    <section id="birthday" class="hidden">
 
-<section id="workouts" class="tab">
+        <h3>🎉 HAPPY 🎉</h3>
 
-    <div class="card">
+        <h1>
 
-        <h2>💪 Workout Session</h2>
+            18TH
 
-        <input
-        type="text"
-        id="workoutName"
-        placeholder="Workout Name">
+        </h1>
 
-        <input
-        type="number"
-        id="workoutDuration"
-        placeholder="Duration (minutes)">
+        <h2>
 
-        <input
-        type="number"
-        id="workoutEnergy"
-        min="1"
-        max="10"
-        placeholder="Energy 1-10">
+            BIRTHDAY
 
-        <textarea
-        id="workoutNotes"
-        placeholder="Notes"></textarea>
+        </h2>
 
-        <button onclick="saveWorkout()">
-            Save Workout
+        <h1 class="name">
+
+            SIDHART
+
+        </h1>
+
+        <button id="next1">
+
+            Continue →
+
         </button>
 
-    </div>
+    </section>
 
-</section>
+    <!-- ================= AI SCAN ================= -->
 
-<!-- SHOOTING -->
+    <section id="system" class="hidden">
 
-<section id="shooting" class="tab">
+        <h1>🤖 Birthday AI Scan</h1>
 
-    <div class="card">
+<pre>
+Name : Sidhart
 
-        <h2>🎯 Shooting Session</h2>
+Age : 18
 
-        <input
-        type="number"
-        id="shots"
-        placeholder="Shots">
+Football Skill : ██████████ 99%
 
-        <input
-        type="number"
-        id="onTarget"
-        placeholder="On Target">
+Homework : ERROR 404
 
-        <input
-        type="number"
-        id="goals"
-        placeholder="Goals">
+Sleep : UNKNOWN
 
-        <input
-        type="number"
-        id="shootingEnergy"
-        min="1"
-        max="10"
-        placeholder="Energy 1-10">
+Eating : UNLIMITED
 
-        <textarea
-        id="shootingNotes"
-        placeholder="Notes"></textarea>
+Legend Status : VERIFIED
+</pre>
 
-        <button onclick="saveShooting()">
-            Save Shooting Session
+        <button id="next2">
+
+            Continue →
+
         </button>
 
-        <div class="results">
+    </section>
+
+    <!-- ================= CAKE ================= -->
+
+    <section id="cake" class="hidden">
+
+        <h1>🎂</h1>
+
+        <h2>
+
+            Make A Wish...
+
+        </h2>
+
+        <p>
+
+            Then click the cake.
+
+        </p>
+
+        <button id="cakeBtn">
+
+            Blow Candles
+
+        </button>
+
+    </section>
+
+    <!-- ================= LETTER ================= -->
+
+    <section id="letter" class="hidden">
+
+        <div class="letterBox">
+
+            <h2>Dear Sidhart,</h2>
 
             <p>
-                Accuracy:
-                <span id="accuracyResult">
-                    0%
-                </span>
-            </p>
 
-            <p>
-                Conversion:
-                <span id="conversionResult">
-                    0%
-                </span>
+                Happy 18th Birthday!
+
+                Congratulations on surviving 18 years without getting
+                transferred to another planet.
+
+                May your football skills keep improving,
+                your goals keep flying in,
+                and your homework continue disappearing.
+
+                Stay awesome.
+
             </p>
 
         </div>
 
-    </div>
+        <button id="next3">
 
-</section>
+            Gallery →
 
-<!-- MATCHES -->
-
-<section id="matches" class="tab">
-
-    <div class="card">
-
-        <h2>⚽ Match Report</h2>
-
-        <input
-        type="text"
-        id="opponent"
-        placeholder="Opponent">
-
-        <input
-        type="text"
-        id="positionPlayed"
-        placeholder="Position Played">
-
-        <input
-        type="number"
-        id="minutesPlayed"
-        placeholder="Minutes Played">
-
-        <input
-        type="number"
-        id="matchGoals"
-        placeholder="Goals">
-
-        <input
-        type="number"
-        id="matchAssists"
-        placeholder="Assists">
-
-        <input
-        type="number"
-        id="matchRating"
-        min="1"
-        max="10"
-        placeholder="Rating 1-10">
-
-        <input
-        type="number"
-        id="matchEnergy"
-        min="1"
-        max="10"
-        placeholder="Energy 1-10">
-
-        <textarea
-        id="matchNotes"
-        placeholder="Match Notes"></textarea>
-
-        <button onclick="saveMatch()">
-            Save Match Report
         </button>
 
-    </div>
+    </section>
 
-</section>
+    <!-- ================= GALLERY ================= -->
 
-<!-- HISTORY -->
+    <section id="gallery" class="hidden">
 
-<section id="history" class="tab">
+        <h1>Memories 📸</h1>
 
-    <div class="card">
+        <div class="gallery">
 
-        <h2>📜 History Timeline</h2>
+            <img src="images/photo1.jpg">
+            <img src="images/photo2.jpg">
+            <img src="images/photo3.jpg">
+            <img src="images/photo4.jpg">
+            <img src="images/photo5.jpg">
+            <img src="images/photo6.jpg">
+            <img src="images/photo7.jpg">
+            <img src="images/photo8.jpg">
 
-        <div id="historyContainer"></div>
-
-    </div>
-
-</section>
-
-<!-- RECORDS -->
-
-<section id="records" class="tab">
-
-    <div class="grid">
-
-        <div class="card">
-            <h2>🏆 Best Accuracy</h2>
-            <p id="bestAccuracy">0%</p>
         </div>
 
-        <div class="card">
-            <h2>🏆 Best Conversion</h2>
-            <p id="bestConversion">0%</p>
-        </div>
+        <button id="finish">
 
-        <div class="card">
-            <h2>🏆 Highest Match Rating</h2>
-            <p id="highestRating">0</p>
-        </div>
+            Final Surprise 🎆
 
-        <div class="card">
-            <h2>🏆 Most Goals</h2>
-            <p id="mostGoals">0</p>
-        </div>
-
-        <div class="card">
-            <h2>🏆 Highest Energy</h2>
-            <p id="highestEnergy">0</p>
-        </div>
-
-    </div>
-
-    <div class="card">
-
-        <h2>💾 Backup</h2>
-
-        <button onclick="exportData()">
-            Export Data
         </button>
 
-        <input
-        type="file"
-        id="importFile">
+    </section>
 
-        <button onclick="importData()">
-            Import Data
-        </button>
+    <!-- ================= FINAL ================= -->
 
-    </div>
+    <section id="final" class="hidden">
 
-</section>
+        <h1>
 
-<script src="script.js"></script>
+            🎆 HAPPY BIRTHDAY 🎆
+
+        </h1>
+
+        <h2>
+
+            SIDHART
+
+        </h2>
+
+        <p>
+
+            Level 18 Completed.
+
+            New Adventures Await.
+
+        </p>
+
+        <div id="fireworks"></div>
+
+    </section>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
