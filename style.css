@@ -1,226 +1,250 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+// =====================================
+// OPERATION LEVEL 18
+// Happy Birthday Sidhart
+// =====================================
+
+const sections = document.querySelectorAll("section");
+
+function showSection(id){
+
+    sections.forEach(section=>{
+
+        section.classList.remove("active");
+        section.classList.add("hidden");
+
+    });
+
+    document.getElementById(id).classList.remove("hidden");
+    document.getElementById(id).classList.add("active");
+
 }
 
-body{
-    background:#0f172a;
-    color:white;
-    min-height:100vh;
-}
+// =====================================
+// Loading Screen
+// =====================================
 
-.topbar{
-    background:#1e293b;
-    padding:20px;
-    text-align:center;
-    border-bottom:2px solid #334155;
-}
+const loadingText=document.getElementById("loadingText");
 
-.topbar h1{
-    font-size:2rem;
-}
+const loadingMessages=[
 
-.navbar{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:10px;
-    padding:15px;
-    background:#111827;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
+"Connecting To Galaxy...",
+"Scanning Universe...",
+"Searching 8.2 Billion Humans...",
+"Football Player Detected...",
+"Birthday Found...",
+"Mission Ready..."
 
-.navbar button{
-    background:#334155;
-    color:white;
-    border:none;
-    padding:12px 18px;
-    border-radius:10px;
-    cursor:pointer;
-    transition:0.3s;
-    font-weight:bold;
-}
+];
 
-.navbar button:hover{
-    background:#475569;
-    transform:translateY(-2px);
-}
+let i=0;
 
-.tab{
-    display:none;
-    padding:20px;
-    max-width:1200px;
-    margin:auto;
-}
+const loadingInterval=setInterval(()=>{
 
-.active{
-    display:block;
-}
+    if(i<loadingMessages.length){
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-    margin-bottom:20px;
-}
+        loadingText.textContent=loadingMessages[i];
 
-.card{
-    background:#1e293b;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.3);
-}
+        i++;
 
-.card h2{
-    margin-bottom:15px;
-    color:#38bdf8;
-}
-
-.card h3{
-    margin-top:15px;
-}
-
-.card p{
-    margin:8px 0;
-}
-
-input,
-textarea{
-    width:100%;
-    margin-top:10px;
-    margin-bottom:15px;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#334155;
-    color:white;
-    font-size:1rem;
-}
-
-input::placeholder,
-textarea::placeholder{
-    color:#cbd5e1;
-}
-
-textarea{
-    resize:vertical;
-    min-height:100px;
-}
-
-button{
-    background:#22c55e;
-    color:white;
-    border:none;
-    padding:12px 18px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    transition:0.3s;
-}
-
-button:hover{
-    transform:translateY(-2px);
-    opacity:0.9;
-}
-
-.results{
-    margin-top:20px;
-    padding:15px;
-    background:#334155;
-    border-radius:10px;
-}
-
-.results p{
-    font-size:1.1rem;
-    margin:10px 0;
-}
-
-#historyContainer{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.history-item{
-    background:#334155;
-    padding:15px;
-    border-radius:10px;
-    border-left:4px solid #38bdf8;
-}
-
-.history-date{
-    font-size:0.85rem;
-    color:#cbd5e1;
-    margin-top:5px;
-}
-
-.record-value{
-    font-size:1.8rem;
-    font-weight:bold;
-    color:#22c55e;
-}
-
-.countdown{
-    font-size:1.5rem;
-    font-weight:bold;
-    color:#fbbf24;
-    margin-top:10px;
-}
-
-.success{
-    color:#22c55e;
-}
-
-.warning{
-    color:#fbbf24;
-}
-
-.danger{
-    color:#ef4444;
-}
-
-@media(max-width:768px){
-
-    .topbar h1{
-        font-size:1.5rem;
     }
 
-    .navbar{
-        gap:8px;
-        padding:10px;
+},800);
+
+setTimeout(()=>{
+
+    clearInterval(loadingInterval);
+
+    showSection("intro");
+
+},5000);
+
+// =====================================
+// Intro
+// =====================================
+
+document.getElementById("scanBtn").onclick=()=>{
+
+    showSection("scan");
+
+};
+
+// =====================================
+// Scan
+// =====================================
+
+document.getElementById("missionBtn").onclick=()=>{
+
+    showSection("gift");
+
+};
+
+// =====================================
+// Gift
+// =====================================
+
+document.getElementById("giftBtn").onclick=()=>{
+
+    alert("🎉 Surprise Unlocked!");
+
+    showSection("birthday");
+
+};
+
+// =====================================
+// Birthday
+// =====================================
+
+document.getElementById("next1").onclick=()=>{
+
+    showSection("system");
+
+};
+
+// =====================================
+// AI Scan
+// =====================================
+
+document.getElementById("next2").onclick=()=>{
+
+    showSection("cake");
+
+};
+
+// =====================================
+// Cake
+// =====================================
+
+document.getElementById("cakeBtn").onclick=()=>{
+
+    alert("🎂 Candles Blown!\n\nMay all your wishes come true!");
+
+    showSection("letter");
+
+};
+
+// =====================================
+// Letter
+// =====================================
+
+document.getElementById("next3").onclick=()=>{
+
+    showSection("gallery");
+
+};
+
+// =====================================
+// Gallery
+// =====================================
+
+document.getElementById("finish").onclick=()=>{
+
+    showSection("final");
+
+    launchFireworks();
+
+};
+
+// =====================================
+// Music
+// =====================================
+
+const music=document.getElementById("bgMusic");
+
+const musicBtn=document.getElementById("musicBtn");
+
+let playing=false;
+
+musicBtn.onclick=()=>{
+
+    if(!playing){
+
+        music.play();
+
+        musicBtn.innerHTML="🔈";
+
+        playing=true;
+
     }
 
-    .navbar button{
-        padding:10px 14px;
-        font-size:0.9rem;
+    else{
+
+        music.pause();
+
+        musicBtn.innerHTML="🔊";
+
+        playing=false;
+
     }
 
-    .tab{
-        padding:15px;
-    }
+};
 
-    .card{
-        padding:15px;
-    }
+// =====================================
+// Gallery Click Effect
+// =====================================
 
-}
+const photos=document.querySelectorAll(".gallery img");
 
-@media(max-width:500px){
+photos.forEach(photo=>{
 
-    .grid{
-        grid-template-columns:1fr;
-    }
+    photo.onclick=()=>{
 
-    .navbar{
-        flex-direction:column;
-    }
+        photo.classList.toggle("zoom");
 
-    .navbar button{
-        width:100%;
+    };
+
+});
+
+// =====================================
+// Fireworks
+// =====================================
+
+function launchFireworks(){
+
+    const fireworks=document.getElementById("fireworks");
+
+    fireworks.innerHTML="";
+
+    for(let i=0;i<40;i++){
+
+        let spark=document.createElement("div");
+
+        spark.className="spark";
+
+        spark.style.left=Math.random()*100+"%";
+
+        spark.style.top=Math.random()*100+"%";
+
+        spark.style.animationDelay=(Math.random()*2)+"s";
+
+        fireworks.appendChild(spark);
+
     }
 
 }
+
+// =====================================
+// Secret Easter Egg
+// Type: FOOTBALL
+// =====================================
+
+let secret="";
+
+document.addEventListener("keydown",(e)=>{
+
+    secret+=e.key.toUpperCase();
+
+    if(secret.length>20){
+
+        secret=secret.slice(-20);
+
+    }
+
+    if(secret.includes("FOOTBALL")){
+
+        alert("⚽ SECRET UNLOCKED!\n\nSidhart The Football Legend!");
+
+        secret="";
+
+    }
+
+});
