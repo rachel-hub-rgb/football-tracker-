@@ -1,422 +1,129 @@
-/* ===========================
-   GLOBAL
-=========================== */
+// ===============================
+// SECRET PIN SYSTEM
+// ===============================
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+let pin = "";
 
-html{
-    scroll-behavior:smooth;
-}
+const correctPin = "1234";
 
-body{
+const dots = [
+    document.getElementById("d1"),
+    document.getElementById("d2"),
+    document.getElementById("d3"),
+    document.getElementById("d4")
+];
 
-    font-family:'Poppins',sans-serif;
+const message = document.getElementById("message");
+const lockScreen = document.querySelector(".lock-screen");
 
-    background:#020617;
+// ===============================
+// PRESS NUMBER
+// ===============================
 
-    color:white;
+function press(number){
 
-    overflow-x:hidden;
+    if(pin.length >= 4) return;
 
-    text-align:center;
+    pin += number;
 
-}
-
-/* ===========================
-   STAR BACKGROUND
-=========================== */
-
-#stars{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-    radial-gradient(white 1px,transparent 1px),
-    radial-gradient(#9ad0ff 1px,transparent 1px);
-
-    background-size:60px 60px,120px 120px;
-
-    animation:moveStars 120s linear infinite;
-
-    opacity:.55;
-
-    z-index:-3;
+    updateDots();
 
 }
 
-@keyframes moveStars{
+// ===============================
+// UPDATE DOTS
+// ===============================
 
-    from{
+function updateDots(){
 
-        transform:translateY(0);
+    dots.forEach(dot => dot.classList.remove("active"));
 
-    }
+    for(let i=0;i<pin.length;i++){
 
-    to{
-
-        transform:translateY(-1000px);
+        dots[i].classList.add("active");
 
     }
 
 }
 
-/* ===========================
-   SECTION
-=========================== */
+// ===============================
+// CLEAR
+// ===============================
 
-section{
+function clearPin(){
 
-    min-height:100vh;
+    pin = pin.slice(0,-1);
 
-    display:none;
+    updateDots();
 
-    justify-content:center;
-
-    align-items:center;
-
-    flex-direction:column;
-
-    padding:40px 20px;
+    message.innerHTML = "";
 
 }
 
-.active{
+// ===============================
+// CHECK PIN
+// ===============================
 
-    display:flex;
+function checkPin(){
 
-}
+    if(pin === correctPin){
 
-.hidden{
+        message.style.color="#7CFC00";
+        message.innerHTML="Access Granted ✓";
 
-    display:none;
+        document.body.classList.add("fade");
 
-}
+        setTimeout(()=>{
 
-/* ===========================
-   HEADINGS
-=========================== */
+            window.location.href="intro.html";
 
-h1{
+        },800);
 
-    font-size:4rem;
+    }
 
-    margin-bottom:15px;
+    else{
 
-}
+        message.style.color="#ff6b6b";
+        message.innerHTML="Wrong PIN!";
 
-h2{
+        lockScreen.classList.add("shake");
 
-    font-size:2rem;
+        setTimeout(()=>{
 
-    margin-bottom:20px;
+            lockScreen.classList.remove("shake");
 
-}
+        },350);
 
-h3{
+        pin="";
 
-    font-size:1.6rem;
-
-    margin-bottom:10px;
-
-}
-
-p{
-
-    max-width:700px;
-
-    line-height:1.7;
-
-    color:#d7d7d7;
-
-    margin-bottom:25px;
-
-}
-
-/* ===========================
-   BUTTON
-=========================== */
-
-button{
-
-    padding:15px 35px;
-
-    border:none;
-
-    border-radius:40px;
-
-    cursor:pointer;
-
-    background:linear-gradient(45deg,#5b21b6,#3b82f6);
-
-    color:white;
-
-    font-size:1rem;
-
-    font-weight:600;
-
-    transition:.35s;
-
-}
-
-button:hover{
-
-    transform:translateY(-4px) scale(1.05);
-
-    box-shadow:0 0 25px #60a5fa;
-
-}
-
-/* ===========================
-   MUSIC
-=========================== */
-
-#musicBtn{
-
-    position:fixed;
-
-    top:20px;
-
-    right:20px;
-
-    width:55px;
-
-    height:55px;
-
-    border-radius:50%;
-
-    z-index:999;
-
-}
-
-/* ===========================
-   LOADER
-=========================== */
-
-.loader{
-
-    width:320px;
-
-    height:14px;
-
-    background:#1f2937;
-
-    border-radius:30px;
-
-    overflow:hidden;
-
-    margin:30px auto;
-
-}
-
-.bar{
-
-    width:0%;
-
-    height:100%;
-
-    background:linear-gradient(90deg,#38bdf8,#8b5cf6);
-
-    animation:loading 5s forwards;
-
-}
-
-@keyframes loading{
-
-    to{
-
-        width:100%;
+        updateDots();
 
     }
 
 }
 
-/* ===========================
-   TERMINAL
-=========================== */
+// ===============================
+// ENTER KEY SUPPORT
+// ===============================
 
-.terminal{
+document.addEventListener("keydown",(e)=>{
 
-    width:90%;
+    if(!isNaN(e.key) && pin.length<4){
 
-    max-width:750px;
+        press(e.key);
 
-    background:rgba(255,255,255,.08);
+    }
 
-    border:1px solid rgba(255,255,255,.15);
+    if(e.key==="Backspace"){
 
-    backdrop-filter:blur(12px);
+        clearPin();
 
-    padding:40px;
+    }
 
-    border-radius:18px;
+    if(e.key==="Enter"){
 
-    text-align:left;
+        checkPin();
 
-}
+    }
 
-.terminal p{
-
-    color:#4ade80;
-
-    margin:10px 0;
-
-}
-
-.terminal h1{
-
-    text-align:center;
-
-    color:#60a5fa;
-
-}
-
-/* ===========================
-   GIFT
-=========================== */
-
-#giftBox{
-
-    font-size:7rem;
-
-    cursor:pointer;
-
-    margin:40px;
-
-    transition:.4s;
-
-}
-
-#giftBox:hover{
-
-    transform:scale(1.15) rotate(-8deg);
-
-}
-
-/* ===========================
-   BIRTHDAY
-=========================== */
-
-.name{
-
-    font-size:5rem;
-
-    color:#facc15;
-
-    text-shadow:
-    0 0 10px #facc15,
-    0 0 30px orange;
-
-}
-
-/* ===========================
-   AI SYSTEM
-=========================== */
-
-pre{
-
-    background:rgba(255,255,255,.08);
-
-    padding:30px;
-
-    border-radius:15px;
-
-    font-size:1rem;
-
-    line-height:2;
-
-    max-width:650px;
-
-    overflow:auto;
-
-}
-
-/* ===========================
-   LETTER
-=========================== */
-
-.letterBox{
-
-    background:rgba(255,255,255,.08);
-
-    backdrop-filter:blur(12px);
-
-    border-radius:20px;
-
-    padding:40px;
-
-    max-width:750px;
-
-    text-align:left;
-
-    box-shadow:0 0 35px rgba(255,255,255,.08);
-
-}
-
-/* ===========================
-   GALLERY
-=========================== */
-
-.gallery{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
-    gap:20px;
-
-    width:95%;
-
-    max-width:1100px;
-
-    margin:40px auto;
-
-}
-
-.gallery img{
-
-    width:100%;
-
-    border-radius:15px;
-
-    transition:.35s;
-
-    cursor:pointer;
-
-}
-
-.gallery img:hover{
-
-    transform:scale(1.05);
-
-    box-shadow:0 0 25px #38bdf8;
-
-}
-
-/* ===========================
-   FINAL
-=========================== */
-
-#final h1{
-
-    color:#facc15;
-
-    text-shadow:
-    0 0 15px gold,
-    0 0 40px orange;
-
-}
-
-#fireworks{
-
-    width:100%;
-
-    height:300px;
-
-}
+});
