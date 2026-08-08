@@ -11,26 +11,73 @@ body {
 #game {
     width: 800px;
     height: 500px;
+
     background: #63b85c;
+
     position: relative;
+
     margin: 50px auto;
+
     overflow: hidden;
+
+    border: 4px solid #222;
 }
 
-/* Player */
+/* Trees */
+
+.tree {
+    position: absolute;
+
+    font-size: 45px;
+
+    width: 50px;
+    height: 50px;
+
+    z-index: 2;
+}
+
+/* House */
+
+.house {
+    position: absolute;
+
+    left: 300px;
+    top: 100px;
+
+    font-size: 80px;
+
+    z-index: 2;
+}
+
+/* Rock */
+
+.rock {
+    position: absolute;
+
+    left: 550px;
+    top: 300px;
+
+    font-size: 40px;
+
+    z-index: 2;
+}
+
+/* PLAYER */
 
 #player {
+    position: absolute;
+
     width: 32px;
     height: 32px;
 
-    background: #3498db;
-
-    position: absolute;
-
     left: 384px;
-    top: 234px;
+    top: 400px;
+
+    background: blue;
+
+    border: 3px solid white;
 
     border-radius: 6px;
 
-    border: 3px solid white;
+    z-index: 10;
 }
