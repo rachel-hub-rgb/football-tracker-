@@ -1,7 +1,7 @@
 const player = document.getElementById("player");
 
 let x = 384;
-let y = 234;
+let y = 400;
 
 const speed = 4;
 
@@ -14,6 +14,7 @@ document.addEventListener("keydown", function(event) {
 document.addEventListener("keyup", function(event) {
     keys[event.key] = false;
 });
+
 
 function gameLoop() {
 
