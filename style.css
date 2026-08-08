@@ -1,1 +1,36 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
 
+body {
+    background: #111;
+    overflow: hidden;
+}
+
+#game {
+    width: 800px;
+    height: 500px;
+    background: #63b85c;
+    position: relative;
+    margin: 50px auto;
+    overflow: hidden;
+}
+
+/* Player */
+
+#player {
+    width: 32px;
+    height: 32px;
+
+    background: #3498db;
+
+    position: absolute;
+
+    left: 384px;
+    top: 234px;
+
+    border-radius: 6px;
+
+    border: 3px solid white;
+}
