@@ -1,19 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My RPG</title>
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+        }
+
+        #game {
+            width: 800px;
+            height: 500px;
+            background: green;
+            position: relative;
+            margin: 50px auto;
+        }
+
+        #player {
+            width: 32px;
+            height: 32px;
+            background: blue;
+
+            position: absolute;
+            left: 384px;
+            top: 234px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div id="game">
-        <div id="player"></div>
-    </div>
-
-    <script src="game.js"></script>
+<div id="game">
+    <div id="player"></div>
+</div>
 
 </body>
 </html>
