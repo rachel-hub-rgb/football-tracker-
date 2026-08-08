@@ -129,7 +129,7 @@ document.addEventListener("keydown", function(event) {
                 "Old Man",
                 [
                     "Hey... you there!",
-                    "I seem to have lost my old key.",
+                    "I seem to have lost my old didlo it key shape .",
                     "I think I dropped it somewhere near the trees.",
                     "Could you find it for me?"
                 ]
@@ -163,8 +163,8 @@ document.addEventListener("keydown", function(event) {
             startDialogue(
                 "Old Man",
                 [
-                    "Keep looking.",
-                    "I think I dropped the key somewhere nearby."
+                    "why you Keep looking.at me ",
+                    "ohhh it my son sihart didlo my bad mate"
                 ]
             );
 
