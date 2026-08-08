@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My RPG</title>
+
+    <title>The Lost Key</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,22 +14,74 @@
 
     <div id="game">
 
-        <!-- Map objects -->
-        <div class="tree" style="left:50px; top:50px;">🌳</div>
-        <div class="tree" style="left:650px; top:50px;">🌳</div>
-        <div class="tree" style="left:50px; top:350px;">🌳</div>
-        <div class="tree" style="left:650px; top:350px;">🌳</div>
+        <!-- WORLD -->
 
-        <div class="house">🏠</div>
+        <div class="object tree" style="left:40px; top:40px;">🌳</div>
+        <div class="object tree" style="left:100px; top:40px;">🌳</div>
+        <div class="object tree" style="left:160px; top:40px;">🌳</div>
 
-        <div class="rock">🪨</div>
+        <div class="object tree" style="left:640px; top:40px;">🌳</div>
+        <div class="object tree" style="left:700px; top:40px;">🌳</div>
+
+        <div class="object tree" style="left:40px; top:400px;">🌳</div>
+        <div class="object tree" style="left:100px; top:400px;">🌳</div>
+
+        <div class="object tree" style="left:640px; top:400px;">🌳</div>
+        <div class="object tree" style="left:700px; top:400px;">🌳</div>
+
+
+        <!-- HOUSE -->
+
+        <div id="house" class="object">
+            🏠
+        </div>
+
+
+        <!-- NPC -->
+
+        <div id="npc" class="character">
+            👴
+        </div>
+
+
+        <!-- KEY -->
+
+        <div id="key" class="item">
+            🗝️
+        </div>
+
 
         <!-- PLAYER -->
-        <div id="player"></div>
+
+        <div id="player">
+            🔵
+        </div>
+
+
+        <!-- DIALOGUE -->
+
+        <div id="dialogue">
+
+            <div id="speaker"></div>
+
+            <div id="message"></div>
+
+            <button onclick="nextDialogue()">Continue</button>
+
+        </div>
+
+
+        <!-- QUEST DISPLAY -->
+
+        <div id="quest">
+            Quest: Talk to the old man.
+        </div>
 
     </div>
+
 
     <script src="game.js"></script>
 
 </body>
+
 </html>
